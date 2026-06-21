@@ -38,7 +38,7 @@ const userSchema = new Schema({
     coverImage: {
         type: String,//cloudinary
     },
-    
+
     watchHistory: [
         {
             type: Schema.Types.ObjectId,
@@ -61,7 +61,7 @@ const userSchema = new Schema({
 //using middleware from mongoose 
 userSchema.pre("save", async function (next) {
     if (!this.isModified("password")) return next();
-    this.password = bcrypt.hash(this.password, 10)//bcrypt take two parameter what you want to bcrypt and number saltrounds required to bcrypt
+    this.password = await bcrypt.hash(this.password, 10)//bcrypt take two parameter what you want to bcrypt and number saltrounds required to bcrypt
     next()
 })
 
